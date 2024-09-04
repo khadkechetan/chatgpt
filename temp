@@ -1,19 +1,1 @@
-import pandas as pd
 
-# Example DataFrame
-data = {
-    'Column1': [1, 2, '', 4],
-    'Column2': [None, 'B', '', 'D'],
-    'Column3': ['', 'Y', None, 'Z'],
-    'Column4': ['A', 'B', 'C', 'D']
-}
-
-df = pd.DataFrame(data)
-
-# Specify the columns to check for emptiness
-columns_to_check = ['Column1', 'Column2', 'Column3']
-
-# Filter rows where all specified columns are empty (empty strings or NaN)
-filtered_df = df[(df[columns_to_check] == '').all(axis=1) | df[columns_to_check].isnull().all(axis=1)]
-
-print(filtered_df)
