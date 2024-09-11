@@ -1,1 +1,3 @@
+frequency = df.groupby(['Category1', 'Category2']).size().reset_index(name='Frequency')
+pivot_table = frequency.pivot(index='Category1', columns='Category2', values='Frequency').fillna(0)
 
