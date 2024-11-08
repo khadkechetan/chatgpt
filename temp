@@ -1,10 +1,1 @@
 
-def save_report(report, outfile):
-    """
-    Take a report and save it to a single Excel file
-    """
-    writer = pd.ExcelWriter(outfile)
-    for manager in report.index.get_level_values(0).unique():
-        temp_df = report.xs(manager, level=0)
-        temp_df.to_excel(writer, manager)
-    writer.save
