@@ -1,1 +1,15 @@
 
+from sklearn.metrics import confusion_matrix
+
+# Example data
+y = [0, 1, 1, 2, 2, 0, 1, 2]
+y_pred = [0, 1, 0, 2, 1, 0, 1, 2]
+
+# Compute confusion matrix
+cm = confusion_matrix(y, y_pred)
+
+# Compute class-wise accuracy
+classwise_accuracy = cm.diagonal() / cm.sum(axis=1)
+classwise_accuracy_dict = {cls: acc for cls, acc in enumerate(classwise_accuracy)}
+
+print("Class-wise Accuracy:", classwise_accuracy_dict)
