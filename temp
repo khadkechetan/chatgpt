@@ -1,1 +1,41 @@
 
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, accuracy_score
+import numpy as np
+
+# Example data
+y = np.array([0, 1, 1, 2, 2, 0, 1, 2])
+y_pred = np.array([0, 1, 0, 2, 1, 0, 1, 2])
+
+# Unique class labels
+class_labels = np.unique(y)
+
+# Compute overall accuracy
+overall_accuracy = accuracy_score(y, y_pred)
+
+# Compute metrics for each class
+class_stats = {}
+for label in class_labels:
+    # Precision, Recall, and F1 for each class
+    precision = precision_score(y, y_pred, labels=[label], average="macro", zero_division=0)
+    recall = recall_score(y, y_pred, labels=[label], average="macro", zero_division=0)
+    f1 = f1_score(y, y_pred, labels=[label], average="macro", zero_division=0)
+    
+    # Store stats for the class
+    class_stats[label] = {
+        "Precision": precision,
+        "Recall": recall,
+        "F1-Score": f1
+    }
+
+# Compute class-wise accuracy using confusion matrix
+cm = confusion_matrix(y, y_pred, labels=class_labels)
+for i, label in enumerate(class_labels):
+    class_stats[label]["Accuracy"] = cm[i, i] / cm[i].sum()
+
+# Display results
+print(f"Overall Accuracy: {overall_accuracy:.2f}\n")
+print("Class-wise Statistics:")
+for label, stats in class_stats.items():
+    print(f"Class {label}:")
+    for metric, value in stats.items():
+        print(f"  {metric}: {value:.2f}")
