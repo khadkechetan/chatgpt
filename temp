@@ -1,1 +1,2 @@
 
+Normalize numerical values by applying the following rules: remove unnecessary trailing zeros after the decimal point, and retain up to two decimal places if non-zero values are present.
